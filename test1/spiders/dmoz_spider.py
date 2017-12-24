@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from threading import Thread
 from test1.items import Test1Item
 
-host = 'dd.ddder.us'
+host = ''
 
 
 def get_url():
