@@ -6,10 +6,11 @@ from bs4 import BeautifulSoup
 from threading import Thread
 from test1.items import Test1Item
 
+host = 'dd.ddder.us'
+
 
 def get_url():
-    host = 'dd.ddder.us'
-    url = 'http://dd.ddder.us/thread0806.php?fid=7'
+    url = ''
     response = requests.get(url)
     response.encoding = 'gbk'
     soup = BeautifulSoup(response.text, features='html.parser')
@@ -17,7 +18,7 @@ def get_url():
     li = []
     for i in target:
         he = 'http://' + host + '/' + i.find('a').attrs['href']
-        if he.find('htm_data') and he != 'http://dd.ddder.us/htm_data/7/1709/2404767.html':
+        if he.find('htm_data'):
             li += [he]
     return li
 
@@ -50,7 +51,7 @@ def get_image(img, filename):
 
 class DmozSpider(scrapy.Spider):
     name = "stack"
-    allowed_domains = ["dd.ddder.us"]
+    allowed_domains = [host]
     start_urls = get_url()
 
     def parse(self, response):
